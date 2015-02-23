@@ -57,3 +57,16 @@ exports.destroy = function(req, res) {
 function handleError(res, err) {
   return res.send(500, err);
 }
+
+function createScreen(data) {
+  var Pageres = require('pageres');
+  var pageres = new Pageres({delay: 2})
+      .src(data.url, ['480x320', '1024x768', 'iphone 5s'], {crop: true})
+      .dest(__dirname);
+  pageres.run(function (err) {
+      if (err) {
+          throw err;
+      }
+      console.log('done');
+  });
+}
